@@ -14,7 +14,19 @@ class UserTableViewCell: UITableViewCell {
     
     @IBOutlet weak var userNameLabel: UILabel!
     
+    var user: User? {
+        didSet {
+            self.updateViews()
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+    }
+    
+    func updateViews() {
+        guard let user = user else { return }
+        
+        userNameLabel.text = user.name
     }
 }

@@ -11,7 +11,7 @@ import CoreData
 
 extension User {
     
-    convenience init(firstName: String?, lastName: String?, name: String?, phoneNumber: String?, email: String?, zipCode: String?, tenant: String?, profilePhoto: String?, managedObjectContext: NSManagedObjectContext) {
+    convenience init(firstName: String?, lastName: String?, name: String?, phoneNumber: String?, email: String?, zipCode: String?, tenant: String?, profilePhoto: String?, managedObjectContext: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
 
         self.init(context: managedObjectContext)
         

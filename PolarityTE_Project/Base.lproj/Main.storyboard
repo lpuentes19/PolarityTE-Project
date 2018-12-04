@@ -236,7 +236,7 @@
                                 <connections>
                                     <outlet property="userImageView" destination="ifT-TN-fcJ" id="cDt-ZY-nhC"/>
                                     <outlet property="userNameLabel" destination="FDM-fG-Yub" id="FQX-bO-xCo"/>
-                                    <segue destination="5Zt-VL-kSA" kind="show" id="iyM-fE-ga3"/>
+                                    <segue destination="5Zt-VL-kSA" kind="show" identifier="toUserDetailVC" id="iyM-fE-ga3"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
