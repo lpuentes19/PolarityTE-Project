@@ -10,8 +10,22 @@ import UIKit
 
 class UserDetailViewController: UIViewController {
 
+    @IBOutlet weak var userImageView: UIImageView!
+    
+    @IBOutlet weak var firstNameTextField: UITextField!
+    @IBOutlet weak var lastNameTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var phoneNumberTextField: UITextField!
+    @IBOutlet weak var zipCodeTextField: UITextField!
+    @IBOutlet weak var tenantTextField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+    }
+    
+    @IBAction func editPhotoButtonTapped(_ sender: Any) {
+    }
+    
+    @IBAction func saveButtonTapped(_ sender: Any) {
     }
 }

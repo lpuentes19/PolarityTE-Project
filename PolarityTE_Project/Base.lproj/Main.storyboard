@@ -30,6 +30,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gWC-7f-FzL">
                                 <rect key="frame" x="164" y="547" width="46" height="30"/>
                                 <state key="normal" title="Create"/>
+                                <connections>
+                                    <action selector="createButtonTapped:" destination="Boc-nO-kaB" eventType="touchUpInside" id="GR7-pN-M0h"/>
+                                </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="sqQ-il-I81" userLabel="Outer Stack">
                                 <rect key="frame" x="16" y="296" width="343" height="210"/>
@@ -158,6 +161,15 @@
                         <viewLayoutGuide key="safeArea" id="H5h-da-xDG"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Create" id="KcF-mh-LMC"/>
+                    <connections>
+                        <outlet property="emailTextField" destination="0PZ-Zq-EUo" id="LdV-pJ-KHM"/>
+                        <outlet property="firstNameTextField" destination="HHD-u4-9Es" id="VBY-L6-p0t"/>
+                        <outlet property="lastNameTextField" destination="afo-35-W7S" id="J6D-D6-LS8"/>
+                        <outlet property="phoneNumberTextField" destination="4QU-tB-RZw" id="dgP-RR-uqH"/>
+                        <outlet property="tenantTextField" destination="1FH-l0-yJi" id="1Ca-tz-Byd"/>
+                        <outlet property="userImageView" destination="zh4-CS-mNf" id="80s-h9-FLz"/>
+                        <outlet property="zipCodeTextField" destination="5qD-9j-RkH" id="Ajo-cp-Xui"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ArQ-Qr-cn8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -222,6 +234,8 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="userImageView" destination="ifT-TN-fcJ" id="cDt-ZY-nhC"/>
+                                    <outlet property="userNameLabel" destination="FDM-fG-Yub" id="FQX-bO-xCo"/>
                                     <segue destination="5Zt-VL-kSA" kind="show" id="iyM-fE-ga3"/>
                                 </connections>
                             </tableViewCell>
@@ -246,7 +260,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Xo2-7F-BsB" userLabel="Outer Stack">
-                                <rect key="frame" x="16" y="228" width="343" height="210"/>
+                                <rect key="frame" x="16" y="257" width="343" height="210"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="NvV-24-aBn">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="30"/>
@@ -352,24 +366,53 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dOa-QJ-zVx">
+                                <rect key="frame" x="141" y="84" width="93" height="90"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DkZ-cE-0DN">
+                                <rect key="frame" x="152" y="182" width="71" height="30"/>
+                                <state key="normal" title="Edit Photo"/>
+                                <connections>
+                                    <action selector="editPhotoButtonTapped:" destination="5Zt-VL-kSA" eventType="touchUpInside" id="5BJ-zI-Ia6"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Xo2-7F-BsB" firstAttribute="top" secondItem="Pto-N6-AAg" secondAttribute="top" constant="164" id="7aR-Hd-Bry"/>
                             <constraint firstItem="Xo2-7F-BsB" firstAttribute="leading" secondItem="Pto-N6-AAg" secondAttribute="leading" constant="16" id="89N-XO-JB3"/>
+                            <constraint firstItem="Pto-N6-AAg" firstAttribute="trailing" secondItem="DkZ-cE-0DN" secondAttribute="trailing" constant="152" id="AcG-gf-6To"/>
+                            <constraint firstItem="dOa-QJ-zVx" firstAttribute="top" secondItem="Pto-N6-AAg" secondAttribute="top" constant="20" id="DwQ-pK-5LM"/>
+                            <constraint firstItem="Pto-N6-AAg" firstAttribute="trailing" secondItem="dOa-QJ-zVx" secondAttribute="trailing" constant="141" id="GFm-rY-6fr"/>
+                            <constraint firstItem="Xo2-7F-BsB" firstAttribute="top" secondItem="DkZ-cE-0DN" secondAttribute="bottom" constant="45" id="S91-dj-gtu"/>
                             <constraint firstItem="Pto-N6-AAg" firstAttribute="trailing" secondItem="Xo2-7F-BsB" secondAttribute="trailing" constant="16" id="Vab-8U-NcG"/>
-                            <constraint firstItem="Pto-N6-AAg" firstAttribute="bottom" secondItem="Xo2-7F-BsB" secondAttribute="bottom" constant="229" id="qgx-sL-wvu"/>
+                            <constraint firstItem="DkZ-cE-0DN" firstAttribute="top" secondItem="dOa-QJ-zVx" secondAttribute="bottom" constant="8" id="hal-y1-kWp"/>
+                            <constraint firstItem="dOa-QJ-zVx" firstAttribute="leading" secondItem="Pto-N6-AAg" secondAttribute="leading" constant="141" id="qLh-xb-aRu"/>
+                            <constraint firstItem="Pto-N6-AAg" firstAttribute="bottom" secondItem="Xo2-7F-BsB" secondAttribute="bottom" constant="200" id="qgx-sL-wvu"/>
+                            <constraint firstItem="DkZ-cE-0DN" firstAttribute="leading" secondItem="Pto-N6-AAg" secondAttribute="leading" constant="152" id="vLD-o0-KHE"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Pto-N6-AAg"/>
                     </view>
                     <navigationItem key="navigationItem" id="tiQ-9a-YnL">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="Ida-Yu-8Ul"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="Ida-Yu-8Ul">
+                            <connections>
+                                <action selector="saveButtonTapped:" destination="5Zt-VL-kSA" id="wlB-9u-gzE"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="emailTextField" destination="KFx-d9-nwd" id="6vU-66-9FV"/>
+                        <outlet property="firstNameTextField" destination="cwW-ET-dRW" id="Qdj-Mw-1bc"/>
+                        <outlet property="lastNameTextField" destination="3sE-UQ-fWe" id="2Hd-R9-VTQ"/>
+                        <outlet property="phoneNumberTextField" destination="ZUC-JX-HlU" id="JHP-CB-9Cd"/>
+                        <outlet property="tenantTextField" destination="aW9-eh-2yI" id="Jpy-w7-1Lj"/>
+                        <outlet property="userImageView" destination="dOa-QJ-zVx" id="2qq-Dp-Ijl"/>
+                        <outlet property="zipCodeTextField" destination="xj0-HJ-COe" id="U89-74-of2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NUn-cF-Bmg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2018" y="207"/>
+            <point key="canvasLocation" x="2016.8" y="206.44677661169416"/>
         </scene>
         <!--Users-->
         <scene sceneID="n7k-SF-zMd">
