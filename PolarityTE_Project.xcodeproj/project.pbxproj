@@ -16,6 +16,7 @@
 		956D584421B71A9E001E2649 /* UserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956D584321B71A9E001E2649 /* UserTableViewController.swift */; };
 		956D584621B71B05001E2649 /* UserDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956D584521B71B05001E2649 /* UserDetailViewController.swift */; };
 		956D584821B71B29001E2649 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956D584721B71B29001E2649 /* UserTableViewCell.swift */; };
+		956D584F21B72436001E2649 /* User+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956D584E21B72436001E2649 /* User+Convenience.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		956D584321B71A9E001E2649 /* UserTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewController.swift; sourceTree = "<group>"; };
 		956D584521B71B05001E2649 /* UserDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailViewController.swift; sourceTree = "<group>"; };
 		956D584721B71B29001E2649 /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
+		956D584E21B72436001E2649 /* User+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+Convenience.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,7 +67,7 @@
 				956D582F21B70EEB001E2649 /* Main.storyboard */,
 				956D584921B71B8B001E2649 /* View Controller */,
 				956D584A21B71B98001E2649 /* View */,
-				956D583221B70EEB001E2649 /* PolarityTE_Project.xcdatamodeld */,
+				956D584D21B72425001E2649 /* Core Data */,
 				956D584021B70FCC001E2649 /* Resources */,
 			);
 			path = PolarityTE_Project;
@@ -98,6 +100,15 @@
 				956D584721B71B29001E2649 /* UserTableViewCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		956D584D21B72425001E2649 /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				956D583221B70EEB001E2649 /* PolarityTE_Project.xcdatamodeld */,
+				956D584E21B72436001E2649 /* User+Convenience.swift */,
+			);
+			path = "Core Data";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -177,6 +188,7 @@
 				956D584421B71A9E001E2649 /* UserTableViewController.swift in Sources */,
 				956D584821B71B29001E2649 /* UserTableViewCell.swift in Sources */,
 				956D584221B71A75001E2649 /* CreateUserViewController.swift in Sources */,
+				956D584F21B72436001E2649 /* User+Convenience.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
