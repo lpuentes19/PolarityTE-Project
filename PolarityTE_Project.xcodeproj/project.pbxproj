@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		956D582C21B70EEB001E2649 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956D582B21B70EEB001E2649 /* AppDelegate.swift */; };
-		956D582E21B70EEB001E2649 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956D582D21B70EEB001E2649 /* ViewController.swift */; };
 		956D583121B70EEB001E2649 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 956D582F21B70EEB001E2649 /* Main.storyboard */; };
 		956D583421B70EEB001E2649 /* PolarityTE_Project.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 956D583221B70EEB001E2649 /* PolarityTE_Project.xcdatamodeld */; };
 		956D583621B70EED001E2649 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 956D583521B70EED001E2649 /* Assets.xcassets */; };
@@ -18,7 +17,6 @@
 /* Begin PBXFileReference section */
 		956D582821B70EEB001E2649 /* PolarityTE_Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PolarityTE_Project.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		956D582B21B70EEB001E2649 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		956D582D21B70EEB001E2649 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		956D583021B70EEB001E2649 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		956D583321B70EEB001E2649 /* PolarityTE_Project.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PolarityTE_Project.xcdatamodel; sourceTree = "<group>"; };
 		956D583521B70EED001E2649 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -56,15 +54,22 @@
 		956D582A21B70EEB001E2649 /* PolarityTE_Project */ = {
 			isa = PBXGroup;
 			children = (
-				956D582B21B70EEB001E2649 /* AppDelegate.swift */,
-				956D582D21B70EEB001E2649 /* ViewController.swift */,
 				956D582F21B70EEB001E2649 /* Main.storyboard */,
+				956D583221B70EEB001E2649 /* PolarityTE_Project.xcdatamodeld */,
+				956D584021B70FCC001E2649 /* Resources */,
+			);
+			path = PolarityTE_Project;
+			sourceTree = "<group>";
+		};
+		956D584021B70FCC001E2649 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				956D582B21B70EEB001E2649 /* AppDelegate.swift */,
 				956D583521B70EED001E2649 /* Assets.xcassets */,
 				956D583721B70EED001E2649 /* LaunchScreen.storyboard */,
 				956D583A21B70EED001E2649 /* Info.plist */,
-				956D583221B70EEB001E2649 /* PolarityTE_Project.xcdatamodeld */,
 			);
-			path = PolarityTE_Project;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,7 +143,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				956D582E21B70EEB001E2649 /* ViewController.swift in Sources */,
 				956D582C21B70EEB001E2649 /* AppDelegate.swift in Sources */,
 				956D583421B70EEB001E2649 /* PolarityTE_Project.xcdatamodeld in Sources */,
 			);
