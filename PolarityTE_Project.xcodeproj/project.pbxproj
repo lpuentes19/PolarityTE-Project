@@ -17,6 +17,7 @@
 		956D584621B71B05001E2649 /* UserDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956D584521B71B05001E2649 /* UserDetailViewController.swift */; };
 		956D584821B71B29001E2649 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956D584721B71B29001E2649 /* UserTableViewCell.swift */; };
 		956D584F21B72436001E2649 /* User+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956D584E21B72436001E2649 /* User+Convenience.swift */; };
+		956D585121B725C7001E2649 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956D585021B725C7001E2649 /* CoreDataStack.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		956D584521B71B05001E2649 /* UserDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailViewController.swift; sourceTree = "<group>"; };
 		956D584721B71B29001E2649 /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		956D584E21B72436001E2649 /* User+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+Convenience.swift"; sourceTree = "<group>"; };
+		956D585021B725C7001E2649 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 			children = (
 				956D583221B70EEB001E2649 /* PolarityTE_Project.xcdatamodeld */,
 				956D584E21B72436001E2649 /* User+Convenience.swift */,
+				956D585021B725C7001E2649 /* CoreDataStack.swift */,
 			);
 			path = "Core Data";
 			sourceTree = "<group>";
@@ -189,6 +192,7 @@
 				956D584821B71B29001E2649 /* UserTableViewCell.swift in Sources */,
 				956D584221B71A75001E2649 /* CreateUserViewController.swift in Sources */,
 				956D584F21B72436001E2649 /* User+Convenience.swift in Sources */,
+				956D585121B725C7001E2649 /* CoreDataStack.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
