@@ -11,7 +11,16 @@ import CoreData
 
 extension User {
     
-    convenience init(firstName: String?, lastName: String?, name: String?, phoneNumber: String?, email: String?, zipCode: String?, tenant: String?, profilePhoto: Data?, managedObjectContext: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
+    convenience init(firstName: String?,
+                     lastName: String?,
+                     name: String?,
+                     phoneNumber: String?,
+                     email: String?,
+                     zipCode: String?,
+                     tenant: String?,
+                     profilePhoto: Data?,
+                     identifier: UUID = UUID(),
+                     managedObjectContext: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
 
         self.init(context: managedObjectContext)
         
@@ -23,5 +32,6 @@ extension User {
         self.zipCode = zipCode
         self.tenant = tenant
         self.profilePhoto = profilePhoto
+        self.identifier = identifier
     }
 }
