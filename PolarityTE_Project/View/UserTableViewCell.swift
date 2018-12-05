@@ -22,6 +22,8 @@ class UserTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        userImageView.layer.cornerRadius = 25
     }
     
     func updateViews() {

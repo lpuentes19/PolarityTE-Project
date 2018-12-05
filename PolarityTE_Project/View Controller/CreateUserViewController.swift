@@ -18,10 +18,26 @@ class CreateUserViewController: UIViewController {
     @IBOutlet weak var phoneNumberTextField: UITextField!
     @IBOutlet weak var zipCodeTextField: UITextField!
     @IBOutlet weak var tenantTextField: UITextField!
-        
+    
+    var selectedImage: UIImage?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupUI()
+    }
+    
+    func setupUI() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleProfileImage))
+        userImageView.addGestureRecognizer(tapGesture)
+        
+        userImageView.layer.cornerRadius = 50
+    }
+    
+    @objc func handleProfileImage() {
+        let pickerController = UIImagePickerController()
+        pickerController.delegate = self
+        present(pickerController, animated: true, completion: nil)
     }
     
     func presentAlert() {
@@ -59,5 +75,16 @@ class CreateUserViewController: UIViewController {
         } catch {
             print("Error saving the user, error: \(error.localizedDescription)")
         }
+    }
+}
+
+extension CreateUserViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[.originalImage] as? UIImage {
+            selectedImage = image
+            userImageView.image = image
+        }
+        dismiss(animated: true, completion: nil)
     }
 }

@@ -50,6 +50,13 @@ class UserDetailViewController: UIViewController {
         title = user.name
         firstNameTextField.text = user.firstName
         lastNameTextField.text = user.lastName
+        userImageView.layer.cornerRadius = 50
+    }
+    
+    func handleProfileImage() {
+        let pickerController = UIImagePickerController()
+        pickerController.delegate = self
+        present(pickerController, animated: true, completion: nil)
     }
     
     func presentAlert() {
@@ -65,6 +72,7 @@ class UserDetailViewController: UIViewController {
     }
     
     @IBAction func editPhotoButtonTapped(_ sender: Any) {
+        handleProfileImage()
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
@@ -89,5 +97,15 @@ class UserDetailViewController: UIViewController {
                 print("Error saving changes to user, error: \(error.localizedDescription)")
             }
         }
+    }
+}
+
+extension UserDetailViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[.originalImage] as? UIImage {
+            userImageView.image = image
+        }
+        dismiss(animated: true, completion: nil)
     }
 }
