@@ -25,6 +25,8 @@ class UserDetailViewController: UIViewController {
         }
     }
     
+    var selectedImage: UIImage?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,12 +47,18 @@ class UserDetailViewController: UIViewController {
     
     func updateViews() {
         guard let user = user,
+            let imageData = user.profilePhoto,
             isViewLoaded else { return }
         
         title = user.name
+        userImageView.image = UIImage(data: imageData)
+        userImageView.layer.cornerRadius = 50
         firstNameTextField.text = user.firstName
         lastNameTextField.text = user.lastName
-        userImageView.layer.cornerRadius = 50
+        phoneNumberTextField.text = user.phoneNumber
+        emailTextField.text = user.email
+        zipCodeTextField.text = user.zipCode
+        tenantTextField.text = user.tenant
     }
     
     func handleProfileImage() {
@@ -82,12 +90,18 @@ class UserDetailViewController: UIViewController {
             let phoneNumber = phoneNumberTextField.text,
             let email = emailTextField.text,
             let zipCode = zipCodeTextField.text,
-            let tenant = tenantTextField.text else { return }
+            let tenant = tenantTextField.text,
+            let imageData = selectedImage?.jpegData(compressionQuality: 0.1) else { return }
         
         if let user = user {
             user.firstName = firstName
             user.lastName = lastName
             user.name = "\(firstName) \(lastName)"
+            user.phoneNumber = phoneNumber
+            user.email = email
+            user.zipCode = zipCode
+            user.tenant = tenant
+            user.profilePhoto = imageData
             
             do {
                 let moc = CoreDataStack.shared.mainContext
@@ -104,6 +118,7 @@ extension UserDetailViewController: UIImagePickerControllerDelegate, UINavigatio
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[.originalImage] as? UIImage {
+            selectedImage = image
             userImageView.image = image
         }
         dismiss(animated: true, completion: nil)

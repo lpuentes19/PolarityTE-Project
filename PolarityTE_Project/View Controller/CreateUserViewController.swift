@@ -51,6 +51,7 @@ class CreateUserViewController: UIViewController {
     }
     
     func clear() {
+        userImageView.image = #imageLiteral(resourceName: "placeholderImg")
         firstNameTextField.text = ""
         lastNameTextField.text = ""
         emailTextField.text = ""
@@ -59,12 +60,16 @@ class CreateUserViewController: UIViewController {
         tenantTextField.text = ""
     }
     
-    
     @IBAction func createButtonTapped(_ sender: Any) {
         guard let firstName = firstNameTextField.text,
-            let lastName = lastNameTextField.text else { return }
+            let lastName = lastNameTextField.text,
+            let phoneNumber = phoneNumberTextField.text,
+            let email = emailTextField.text,
+            let zipCode = zipCodeTextField.text,
+            let tenant = tenantTextField.text,
+            let imageData = selectedImage?.jpegData(compressionQuality: 0.1) else { return }
         
-        _ = User(firstName: firstName, lastName: lastName, name: "\(firstName) \(lastName)", phoneNumber: nil, email: nil, zipCode: nil, tenant: nil, profilePhoto: nil)
+        _ = User(firstName: firstName, lastName: lastName, name: "\(firstName) \(lastName)", phoneNumber: phoneNumber, email: email, zipCode: zipCode, tenant: tenant, profilePhoto: imageData)
         
         clear()
         

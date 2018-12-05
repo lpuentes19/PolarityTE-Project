@@ -27,8 +27,10 @@ class UserTableViewCell: UITableViewCell {
     }
     
     func updateViews() {
-        guard let user = user else { return }
+        guard let user = user,
+            let imageData = user.profilePhoto else { return }
         
+        userImageView.image = UIImage(data: imageData)
         userNameLabel.text = user.name
     }
 }
