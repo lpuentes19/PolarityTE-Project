@@ -67,9 +67,9 @@
 			isa = PBXGroup;
 			children = (
 				956D582F21B70EEB001E2649 /* Main.storyboard */,
+				956D584D21B72425001E2649 /* Model */,
 				956D584921B71B8B001E2649 /* View Controller */,
 				956D584A21B71B98001E2649 /* View */,
-				956D584D21B72425001E2649 /* Core Data */,
 				956D584021B70FCC001E2649 /* Resources */,
 			);
 			path = PolarityTE_Project;
@@ -104,14 +104,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		956D584D21B72425001E2649 /* Core Data */ = {
+		956D584D21B72425001E2649 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				956D583221B70EEB001E2649 /* PolarityTE_Project.xcdatamodeld */,
 				956D584E21B72436001E2649 /* User+Convenience.swift */,
 				956D585021B725C7001E2649 /* CoreDataStack.swift */,
 			);
-			path = "Core Data";
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
