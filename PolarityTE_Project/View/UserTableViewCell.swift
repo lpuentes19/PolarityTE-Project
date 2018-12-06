@@ -27,10 +27,9 @@ class UserTableViewCell: UITableViewCell {
     }
     
     func updateViews() {
-        guard let user = user,
-            let imageData = user.profilePhoto else { return }
+        guard let user = user else { return }
         
-        userImageView.image = UIImage(data: imageData)
+        userImageView.image = UIImage(data: user.profilePhoto ?? Data())
         userNameLabel.text = user.name
     }
 }

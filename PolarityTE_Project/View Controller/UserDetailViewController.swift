@@ -47,11 +47,10 @@ class UserDetailViewController: UIViewController {
     
     func updateViews() {
         guard let user = user,
-            let imageData = user.profilePhoto,
             isViewLoaded else { return }
         
         title = user.name
-        userImageView.image = UIImage(data: imageData)
+        userImageView.image = UIImage(data: user.profilePhoto ?? Data())
         userImageView.layer.cornerRadius = 50
         firstNameTextField.text = user.firstName
         lastNameTextField.text = user.lastName

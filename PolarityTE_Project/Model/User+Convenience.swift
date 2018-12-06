@@ -11,6 +11,22 @@ import CoreData
 
 extension User {
     
+    var userRepresentation: UserRepresentation? {
+        guard let firstName = firstName,
+            let lastName = lastName,
+            let name = name,
+            let phoneNumber = phoneNumber,
+            let email = email,
+            let zipCode = zipCode,
+            let tenant = tenant,
+            let profilePhoto = profilePhoto else { return nil }
+        
+        if guid == nil {
+            guid = UUID()
+        }
+        return UserRepresentation(firstName: firstName, lastName: lastName, name: name, phoneNumber: phoneNumber, email: email, zipCode: zipCode, tenant: tenant, profilePhoto: profilePhoto, guid: guid!)
+    }
+    
     convenience init(firstName: String?,
                      lastName: String?,
                      name: String?,
@@ -19,10 +35,10 @@ extension User {
                      zipCode: String?,
                      tenant: String?,
                      profilePhoto: Data?,
-                     identifier: UUID = UUID(),
-                     managedObjectContext: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
+                     guid: UUID = UUID(),
+                     context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
 
-        self.init(context: managedObjectContext)
+        self.init(context: context)
         
         self.firstName = firstName
         self.lastName = lastName
@@ -32,6 +48,20 @@ extension User {
         self.zipCode = zipCode
         self.tenant = tenant
         self.profilePhoto = profilePhoto
-        self.identifier = identifier
+        self.guid = guid
+    }
+    
+    convenience init(userRepresentation: UserRepresentation, context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
+        
+        self.init(firstName: userRepresentation.firstName,
+                  lastName: userRepresentation.lastName,
+                  name: userRepresentation.name,
+                  phoneNumber: userRepresentation.phoneNumber,
+                  email: userRepresentation.email,
+                  zipCode: userRepresentation.zipCode,
+                  tenant: userRepresentation.tenant,
+                  profilePhoto: userRepresentation.profilePhoto,
+                  guid: userRepresentation.guid!,
+                  context: context)
     }
 }

@@ -18,6 +18,8 @@
 		956D584821B71B29001E2649 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956D584721B71B29001E2649 /* UserTableViewCell.swift */; };
 		956D584F21B72436001E2649 /* User+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956D584E21B72436001E2649 /* User+Convenience.swift */; };
 		956D585121B725C7001E2649 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956D585021B725C7001E2649 /* CoreDataStack.swift */; };
+		956D585321B85401001E2649 /* UserRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956D585221B85401001E2649 /* UserRepresentation.swift */; };
+		956D585521B85AB7001E2649 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956D585421B85AB7001E2649 /* UserController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		956D584721B71B29001E2649 /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		956D584E21B72436001E2649 /* User+Convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+Convenience.swift"; sourceTree = "<group>"; };
 		956D585021B725C7001E2649 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		956D585221B85401001E2649 /* UserRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepresentation.swift; sourceTree = "<group>"; };
+		956D585421B85AB7001E2649 /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +113,8 @@
 			children = (
 				956D583221B70EEB001E2649 /* PolarityTE_Project.xcdatamodeld */,
 				956D584E21B72436001E2649 /* User+Convenience.swift */,
+				956D585221B85401001E2649 /* UserRepresentation.swift */,
+				956D585421B85AB7001E2649 /* UserController.swift */,
 				956D585021B725C7001E2649 /* CoreDataStack.swift */,
 			);
 			path = Model;
@@ -187,11 +193,13 @@
 			files = (
 				956D582C21B70EEB001E2649 /* AppDelegate.swift in Sources */,
 				956D584621B71B05001E2649 /* UserDetailViewController.swift in Sources */,
+				956D585521B85AB7001E2649 /* UserController.swift in Sources */,
 				956D583421B70EEB001E2649 /* PolarityTE_Project.xcdatamodeld in Sources */,
 				956D584421B71A9E001E2649 /* UserTableViewController.swift in Sources */,
 				956D584821B71B29001E2649 /* UserTableViewCell.swift in Sources */,
 				956D584221B71A75001E2649 /* CreateUserViewController.swift in Sources */,
 				956D584F21B72436001E2649 /* User+Convenience.swift in Sources */,
+				956D585321B85401001E2649 /* UserRepresentation.swift in Sources */,
 				956D585121B725C7001E2649 /* CoreDataStack.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

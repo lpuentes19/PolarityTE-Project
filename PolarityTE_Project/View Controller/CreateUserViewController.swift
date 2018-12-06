@@ -19,6 +19,7 @@ class CreateUserViewController: UIViewController {
     @IBOutlet weak var zipCodeTextField: UITextField!
     @IBOutlet weak var tenantTextField: UITextField!
     
+    let userController = UserController()
     var selectedImage: UIImage?
     
     override func viewDidLoad() {
