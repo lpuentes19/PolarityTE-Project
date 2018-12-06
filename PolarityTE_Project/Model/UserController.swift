@@ -61,7 +61,7 @@ class UserController {
             DispatchQueue.main.async {
                 do {
                     let userRepresentations = try JSONDecoder().decode([UserRepresentation].self, from: data)
-                    print(userRepresentations)
+                    //print(userRepresentations)
                     for userRep in userRepresentations {
                         let uuid = userRep.guid
                         if let user = self.user(withUUID: uuid!) {
@@ -87,12 +87,13 @@ class UserController {
     func patch(user: User, completion: @escaping (Error?) -> Void = {_ in}) {
         let requestURL = baseURL.appendingPathComponent(user.guid!)
         var request = URLRequest(url: requestURL)
-        let headers = ["X-api-key":"TqzKu0n0kW7uI5GkghsK76jMxLa4Km0EadtnmSM7", "Content-Type":"application/json"]
+        let headers = ["X-api-key":"TqzKu0n0kW7uI5GkghsK76jMxLa4Km0EadtnmSM7"]
         request.allHTTPHeaderFields = headers
         request.httpMethod = "PATCH"
         do {
             guard let representation = user.userRepresentation else { throw NSError() }
             request.httpBody = try JSONEncoder().encode(representation)
+            print(String(data: request.httpBody!, encoding: .utf8)!)
         } catch {
             print("Error encoding user, error: \(error.localizedDescription)")
             completion(error)
@@ -109,9 +110,8 @@ class UserController {
                 print("statusCode should be 200, but is \(httpStatus.statusCode)")
                 print("response = \(response)")
             }
-            
             completion(nil)
-            }.resume()
+        }.resume()
     }
     
     // Fetching users using their guid
@@ -134,7 +134,7 @@ class UserController {
         user.email = representation.email
         user.zipCode = representation.zipCode
         user.tenant = representation.tenant
-        user.profilePhoto = representation.profilePhoto
+        user.profilePhoto = representation.profilePhoto?.data(using: .utf8)?.base64EncodedData()
         user.guid = representation.guid
     }
 }

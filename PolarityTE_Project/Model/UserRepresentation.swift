@@ -17,7 +17,7 @@ struct UserRepresentation: Codable, Equatable {
     var email: String
     var zipCode: String
     var tenant: String
-    var profilePhoto: Data?
+    var profilePhoto: String?
     var guid: String?
 }
 
@@ -30,7 +30,7 @@ extension UserRepresentation {
         case email
         case zipCode = "zipcode"
         case tenant
-        case profilePhoto = "profilePhoto"
+        case profilePhoto = "profile_photo"
         case guid
     }
 }
