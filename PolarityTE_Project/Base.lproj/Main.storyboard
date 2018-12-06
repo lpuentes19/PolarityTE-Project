@@ -181,10 +181,10 @@
             </objects>
             <point key="canvasLocation" x="212" y="-509.59520239880067"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--User Tab Bar Controller-->
         <scene sceneID="Yqv-5S-yHJ">
             <objects>
-                <tabBarController id="8IN-vG-hvn" sceneMemberID="viewController">
+                <tabBarController id="8IN-vG-hvn" customClass="UserTabBarController" customModule="PolarityTE_Project" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="SMn-Dt-w4H">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>

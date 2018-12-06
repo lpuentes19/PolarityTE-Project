@@ -25,6 +25,7 @@ class UserDetailViewController: UIViewController {
         }
     }
     
+    var userController: UserController?
     var selectedImage: UIImage?
     
     override func viewDidLoad() {
@@ -50,7 +51,9 @@ class UserDetailViewController: UIViewController {
             isViewLoaded else { return }
         
         title = user.name
-        userImageView.image = UIImage(data: user.profilePhoto ?? Data())
+        if let imageData = user.profilePhoto {
+            userImageView.image = UIImage(data: imageData) ?? #imageLiteral(resourceName: "placeholderImg")
+        }
         userImageView.layer.cornerRadius = 50
         firstNameTextField.text = user.firstName
         lastNameTextField.text = user.lastName
@@ -101,6 +104,8 @@ class UserDetailViewController: UIViewController {
             user.zipCode = zipCode
             user.tenant = tenant
             user.profilePhoto = imageData
+            
+            userController?.patch(user: user)
             
             do {
                 let moc = CoreDataStack.shared.mainContext

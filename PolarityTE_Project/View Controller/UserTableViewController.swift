@@ -12,6 +12,8 @@ import CoreData
 class UserTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
     // MARK: - Properties
+    var userController: UserController?
+    
     lazy var fetchedResultsController: NSFetchedResultsController<User> = {
         let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
@@ -34,6 +36,9 @@ class UserTableViewController: UITableViewController, NSFetchedResultsController
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if let tbc = self.tabBarController as? UserTabBarController {
+            userController = tbc.userController
+        }
     }
 
     // MARK: - Table view data source
@@ -108,6 +113,7 @@ class UserTableViewController: UITableViewController, NSFetchedResultsController
                 let user = fetchedResultsController.object(at: indexPath)
                 userDetailVC.user = user
             }
+            userDetailVC.userController = userController
         }
     }
 }

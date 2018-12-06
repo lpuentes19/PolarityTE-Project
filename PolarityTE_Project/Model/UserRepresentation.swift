@@ -10,15 +10,15 @@ import Foundation
 
 struct UserRepresentation: Codable, Equatable {
     
-    var firstName: String?
-    var lastName: String?
-    var name: String?
-    var phoneNumber: String?
-    var email: String?
-    var zipCode: String?
-    var tenant: String?
+    var firstName: String
+    var lastName: String
+    var name: String
+    var phoneNumber: String
+    var email: String
+    var zipCode: String
+    var tenant: String
     var profilePhoto: Data?
-    var guid: UUID?
+    var guid: String?
 }
 
 extension UserRepresentation {

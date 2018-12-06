@@ -22,20 +22,20 @@ extension User {
             let profilePhoto = profilePhoto else { return nil }
         
         if guid == nil {
-            guid = UUID()
+            guid = UUID().uuidString
         }
         return UserRepresentation(firstName: firstName, lastName: lastName, name: name, phoneNumber: phoneNumber, email: email, zipCode: zipCode, tenant: tenant, profilePhoto: profilePhoto, guid: guid!)
     }
     
-    convenience init(firstName: String?,
-                     lastName: String?,
-                     name: String?,
-                     phoneNumber: String?,
-                     email: String?,
-                     zipCode: String?,
-                     tenant: String?,
+    convenience init(firstName: String,
+                     lastName: String,
+                     name: String,
+                     phoneNumber: String,
+                     email: String,
+                     zipCode: String,
+                     tenant: String,
                      profilePhoto: Data?,
-                     guid: UUID = UUID(),
+                     guid: String?,
                      context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
 
         self.init(context: context)

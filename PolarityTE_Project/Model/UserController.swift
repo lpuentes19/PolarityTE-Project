@@ -17,6 +17,32 @@ class UserController {
         fetchUsersFromServer()
     }
     
+    // Create
+    func post(user: User, completion: @escaping (Error?) -> Void = {_ in}) {
+        var request = URLRequest(url: baseURL)
+        let headers = ["X-api-key":"TqzKu0n0kW7uI5GkghsK76jMxLa4Km0EadtnmSM7", "Content-Type":"application/json"]
+        request.allHTTPHeaderFields = headers
+        request.httpMethod = "POST"
+        do {
+            guard let representation = user.userRepresentation else { throw NSError() }
+            request.httpBody = try JSONEncoder().encode(representation)
+        } catch {
+            print("Error encoding user, error: \(error.localizedDescription)")
+            completion(error)
+            return
+        }
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if error != nil {
+                print("Error PUTting user to server, error: \(error!.localizedDescription)")
+                completion(error)
+                return
+            }
+            completion(nil)
+        }.resume()
+    }
+    
+    // Read/Fetch users from database
     func fetchUsersFromServer(completion: @escaping (Error?) -> Void = {_ in }) {
         var requestURL = URLRequest(url: baseURL)
         let headers = ["X-api-key":"TqzKu0n0kW7uI5GkghsK76jMxLa4Km0EadtnmSM7"]
@@ -27,7 +53,6 @@ class UserController {
                 completion(error)
                 return
             }
-            
             guard let data = data else {
                 print("No data returned")
                 completion(error)
@@ -35,8 +60,7 @@ class UserController {
             }
             DispatchQueue.main.async {
                 do {
-                    let decoder = JSONDecoder()
-                    let userRepresentations = try decoder.decode([UserRepresentation].self, from: data)
+                    let userRepresentations = try JSONDecoder().decode([UserRepresentation].self, from: data)
                     print(userRepresentations)
                     for userRep in userRepresentations {
                         let uuid = userRep.guid
@@ -55,13 +79,45 @@ class UserController {
                 } catch {
                     print("Error decoding users: \(error.localizedDescription)")
                 }
+                completion(nil)
             }
         }.resume()
     }
+    // Update User
+    func patch(user: User, completion: @escaping (Error?) -> Void = {_ in}) {
+        let requestURL = baseURL.appendingPathComponent(user.guid!)
+        var request = URLRequest(url: requestURL)
+        let headers = ["X-api-key":"TqzKu0n0kW7uI5GkghsK76jMxLa4Km0EadtnmSM7", "Content-Type":"application/json"]
+        request.allHTTPHeaderFields = headers
+        request.httpMethod = "PATCH"
+        do {
+            guard let representation = user.userRepresentation else { throw NSError() }
+            request.httpBody = try JSONEncoder().encode(representation)
+        } catch {
+            print("Error encoding user, error: \(error.localizedDescription)")
+            completion(error)
+            return
+        }
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if error != nil {
+                print("Error PATCHing user to server, error: \(error!.localizedDescription)")
+                completion(error)
+                return
+            }
+            
+            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {
+                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                print("response = \(response)")
+            }
+            
+            completion(nil)
+            }.resume()
+    }
     
-    private func user(withUUID uuid: UUID) -> User? {
+    // Fetching users using their guid
+    private func user(withUUID uuid: String) -> User? {
         let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
-        fetchRequest.predicate = NSPredicate(format: "guid == %@", uuid as NSUUID)
+        fetchRequest.predicate = NSPredicate(format: "guid == %@", uuid)
         let moc = CoreDataStack.shared.mainContext
         
         // Assuming there is only one matching User
@@ -69,6 +125,7 @@ class UserController {
         return (try? moc.fetch(fetchRequest))?.first
     }
     
+    // Update helper method
     private func update(user: User, with representation: UserRepresentation) {
         user.firstName = representation.firstName
         user.lastName = representation.lastName
@@ -78,5 +135,6 @@ class UserController {
         user.zipCode = representation.zipCode
         user.tenant = representation.tenant
         user.profilePhoto = representation.profilePhoto
+        user.guid = representation.guid
     }
 }

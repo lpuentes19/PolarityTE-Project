@@ -20,6 +20,7 @@
 		956D585121B725C7001E2649 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956D585021B725C7001E2649 /* CoreDataStack.swift */; };
 		956D585321B85401001E2649 /* UserRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956D585221B85401001E2649 /* UserRepresentation.swift */; };
 		956D585521B85AB7001E2649 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 956D585421B85AB7001E2649 /* UserController.swift */; };
+		95C87E1621B8A96E00993208 /* UserTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C87E1521B8A96E00993208 /* UserTabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		956D585021B725C7001E2649 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		956D585221B85401001E2649 /* UserRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepresentation.swift; sourceTree = "<group>"; };
 		956D585421B85AB7001E2649 /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
+		95C87E1521B8A96E00993208 /* UserTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +95,7 @@
 		956D584921B71B8B001E2649 /* View Controller */ = {
 			isa = PBXGroup;
 			children = (
+				95C87E1521B8A96E00993208 /* UserTabBarController.swift */,
 				956D584121B71A75001E2649 /* CreateUserViewController.swift */,
 				956D584321B71A9E001E2649 /* UserTableViewController.swift */,
 				956D584521B71B05001E2649 /* UserDetailViewController.swift */,
@@ -191,6 +194,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95C87E1621B8A96E00993208 /* UserTabBarController.swift in Sources */,
 				956D582C21B70EEB001E2649 /* AppDelegate.swift in Sources */,
 				956D584621B71B05001E2649 /* UserDetailViewController.swift in Sources */,
 				956D585521B85AB7001E2649 /* UserController.swift in Sources */,

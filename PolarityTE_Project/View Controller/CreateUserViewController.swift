@@ -10,8 +10,7 @@ import UIKit
 
 class CreateUserViewController: UIViewController {
 
-    @IBOutlet weak var userImageView: UIImageView!
-    
+    // MARK: - Properties
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
@@ -19,12 +18,17 @@ class CreateUserViewController: UIViewController {
     @IBOutlet weak var zipCodeTextField: UITextField!
     @IBOutlet weak var tenantTextField: UITextField!
     
-    let userController = UserController()
+    @IBOutlet weak var userImageView: UIImageView!
+    
+    var userController: UserController?
     var selectedImage: UIImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if let tbc = self.tabBarController as? UserTabBarController {
+            userController = tbc.userController
+        }
         setupUI()
     }
     
@@ -62,15 +66,16 @@ class CreateUserViewController: UIViewController {
     }
     
     @IBAction func createButtonTapped(_ sender: Any) {
-        guard let firstName = firstNameTextField.text,
-            let lastName = lastNameTextField.text,
-            let phoneNumber = phoneNumberTextField.text,
-            let email = emailTextField.text,
-            let zipCode = zipCodeTextField.text,
-            let tenant = tenantTextField.text,
+        guard let firstName = firstNameTextField.text, !firstName.isEmpty,
+            let lastName = lastNameTextField.text, !lastName.isEmpty,
+            let phoneNumber = phoneNumberTextField.text, !phoneNumber.isEmpty,
+            let email = emailTextField.text, !email.isEmpty,
+            let zipCode = zipCodeTextField.text, !zipCode.isEmpty,
+            let tenant = tenantTextField.text, !tenant.isEmpty,
             let imageData = selectedImage?.jpegData(compressionQuality: 0.1) else { return }
         
-        _ = User(firstName: firstName, lastName: lastName, name: "\(firstName) \(lastName)", phoneNumber: phoneNumber, email: email, zipCode: zipCode, tenant: tenant, profilePhoto: imageData)
+        let user = User(firstName: firstName, lastName: lastName, name: "\(firstName) \(lastName)", phoneNumber: phoneNumber, email: email, zipCode: zipCode, tenant: tenant, profilePhoto: imageData, guid: nil)
+        userController?.post(user: user)
         
         clear()
         
