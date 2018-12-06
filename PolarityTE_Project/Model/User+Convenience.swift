@@ -24,7 +24,7 @@ extension User {
         if guid == nil {
             guid = UUID().uuidString
         }
-        return UserRepresentation(firstName: firstName, lastName: lastName, name: name, phoneNumber: phoneNumber, email: email, zipCode: zipCode, tenant: tenant, profilePhoto: String(data: profilePhoto.base64EncodedData(), encoding: .utf8), guid: guid!)
+        return UserRepresentation(firstName: firstName, lastName: lastName, name: name, phoneNumber: phoneNumber, email: email, zipCode: zipCode, tenant: tenant, profilePhoto: String(data: profilePhoto, encoding: .utf8), guid: guid!)
     }
     
     convenience init(firstName: String,
@@ -60,8 +60,12 @@ extension User {
                   email: userRepresentation.email,
                   zipCode: userRepresentation.zipCode,
                   tenant: userRepresentation.tenant,
-                  profilePhoto: userRepresentation.profilePhoto?.data(using: .utf8)?.base64EncodedData(),
+                  profilePhoto: userRepresentation.profilePhoto?.data(using: .utf8),
                   guid: userRepresentation.guid!,
                   context: context)
+        
+        if let imageData = userRepresentation.profilePhoto, let decodedData = Data(base64Encoded: imageData, options: .ignoreUnknownCharacters) {
+            profilePhoto = decodedData
+        }
     }
 }

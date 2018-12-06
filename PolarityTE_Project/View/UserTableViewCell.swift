@@ -26,11 +26,19 @@ class UserTableViewCell: UITableViewCell {
         userImageView.layer.cornerRadius = 25
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        userImageView.image = #imageLiteral(resourceName: "placeholderImg")
+    }
+    
     func updateViews() {
         guard let user = user else { return }
+        
         if let imageData = user.profilePhoto {
             userImageView.image = UIImage(data: imageData) ?? #imageLiteral(resourceName: "placeholderImg")
         }
+        
         userNameLabel.text = user.name
     }
 }

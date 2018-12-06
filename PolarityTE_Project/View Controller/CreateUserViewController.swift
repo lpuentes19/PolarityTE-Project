@@ -72,9 +72,9 @@ class CreateUserViewController: UIViewController {
             let email = emailTextField.text, !email.isEmpty,
             let zipCode = zipCodeTextField.text, !zipCode.isEmpty,
             let tenant = tenantTextField.text, !tenant.isEmpty,
-            let imageData = selectedImage?.jpegData(compressionQuality: 0.1) else { return }
+            let imageData = selectedImage?.jpegData(compressionQuality: 0.1)?.base64EncodedString() else { return }
         
-        let user = User(firstName: firstName, lastName: lastName, name: "\(firstName) \(lastName)", phoneNumber: phoneNumber, email: email, zipCode: zipCode, tenant: tenant, profilePhoto: imageData.base64EncodedData(), guid: nil)
+        let user = User(firstName: firstName, lastName: lastName, name: "\(firstName) \(lastName)", phoneNumber: phoneNumber, email: email, zipCode: zipCode, tenant: tenant, profilePhoto: imageData.data(using: .utf8), guid: nil)
         userController?.post(user: user)
         
         clear()

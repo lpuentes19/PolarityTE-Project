@@ -14,18 +14,21 @@ let baseURL = URL(string: "https://q1o3gh76yb.execute-api.us-west-2.amazonaws.co
 class UserController {
     
     init() {
-        fetchUsersFromServer()
+        fetchUsers()
     }
     
     // Create
     func post(user: User, completion: @escaping (Error?) -> Void = {_ in}) {
         var request = URLRequest(url: baseURL)
-        let headers = ["X-api-key":"TqzKu0n0kW7uI5GkghsK76jMxLa4Km0EadtnmSM7", "Content-Type":"application/json"]
+        let headers = ["X-api-key":"TqzKu0n0kW7uI5GkghsK76jMxLa4Km0EadtnmSM7"]
         request.allHTTPHeaderFields = headers
         request.httpMethod = "POST"
         do {
             guard let representation = user.userRepresentation else { throw NSError() }
             request.httpBody = try JSONEncoder().encode(representation)
+            if let user = self.user(withUUID: user.guid!) {
+                self.update(user: user, with: representation)
+            }
         } catch {
             print("Error encoding user, error: \(error.localizedDescription)")
             completion(error)
@@ -39,11 +42,11 @@ class UserController {
                 return
             }
             completion(nil)
-        }.resume()
+            }.resume()
     }
     
     // Read/Fetch users from database
-    func fetchUsersFromServer(completion: @escaping (Error?) -> Void = {_ in }) {
+    func fetchUsers(completion: @escaping (Error?) -> Void = {_ in }) {
         var requestURL = URLRequest(url: baseURL)
         let headers = ["X-api-key":"TqzKu0n0kW7uI5GkghsK76jMxLa4Km0EadtnmSM7"]
         requestURL.allHTTPHeaderFields = headers
@@ -61,7 +64,6 @@ class UserController {
             DispatchQueue.main.async {
                 do {
                     let userRepresentations = try JSONDecoder().decode([UserRepresentation].self, from: data)
-                    //print(userRepresentations)
                     for userRep in userRepresentations {
                         let uuid = userRep.guid
                         if let user = self.user(withUUID: uuid!) {
@@ -72,17 +74,16 @@ class UserController {
                             let _ = User(userRepresentation: userRep)
                         }
                     }
-                    
                     let moc = CoreDataStack.shared.mainContext
                     try moc.save()
-                    
                 } catch {
                     print("Error decoding users: \(error.localizedDescription)")
                 }
                 completion(nil)
             }
-        }.resume()
+            }.resume()
     }
+    
     // Update User
     func patch(user: User, completion: @escaping (Error?) -> Void = {_ in}) {
         let requestURL = baseURL.appendingPathComponent(user.guid!)
@@ -93,7 +94,9 @@ class UserController {
         do {
             guard let representation = user.userRepresentation else { throw NSError() }
             request.httpBody = try JSONEncoder().encode(representation)
-            print(String(data: request.httpBody!, encoding: .utf8)!)
+            if let user = self.user(withUUID: user.guid!) {
+                self.update(user: user, with: representation)
+            }
         } catch {
             print("Error encoding user, error: \(error.localizedDescription)")
             completion(error)
@@ -105,13 +108,8 @@ class UserController {
                 completion(error)
                 return
             }
-            
-            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {
-                print("statusCode should be 200, but is \(httpStatus.statusCode)")
-                print("response = \(response)")
-            }
             completion(nil)
-        }.resume()
+            }.resume()
     }
     
     // Fetching users using their guid
@@ -134,7 +132,9 @@ class UserController {
         user.email = representation.email
         user.zipCode = representation.zipCode
         user.tenant = representation.tenant
-        user.profilePhoto = representation.profilePhoto?.data(using: .utf8)?.base64EncodedData()
+        if let imageData = representation.profilePhoto, let decodedData = Data(base64Encoded: imageData, options: .ignoreUnknownCharacters) {
+            user.profilePhoto = decodedData
+        }
         user.guid = representation.guid
     }
 }

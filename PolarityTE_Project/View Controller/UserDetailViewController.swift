@@ -92,8 +92,7 @@ class UserDetailViewController: UIViewController {
             let phoneNumber = phoneNumberTextField.text,
             let email = emailTextField.text,
             let zipCode = zipCodeTextField.text,
-            let tenant = tenantTextField.text,
-            let imageData = selectedImage?.jpegData(compressionQuality: 0.1) else { return }
+            let tenant = tenantTextField.text else { return }
         
         if let user = user {
             user.firstName = firstName
@@ -103,8 +102,9 @@ class UserDetailViewController: UIViewController {
             user.email = email
             user.zipCode = zipCode
             user.tenant = tenant
-            user.profilePhoto = imageData
-            
+            if let imageData = selectedImage?.jpegData(compressionQuality: 0.1)?.base64EncodedString() {
+                user.profilePhoto = imageData.data(using: .utf8)
+            }            
             userController?.patch(user: user)
             
             do {

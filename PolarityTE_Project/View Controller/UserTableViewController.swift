@@ -52,7 +52,7 @@ class UserTableViewController: UITableViewController, NSFetchedResultsController
         let user = fetchedResultsController.object(at: indexPath)
         
         cell.user = user
-
+        
         return cell
     }
 
