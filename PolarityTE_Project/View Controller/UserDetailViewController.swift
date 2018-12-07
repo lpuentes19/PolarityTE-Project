@@ -18,6 +18,7 @@ class UserDetailViewController: UIViewController {
     @IBOutlet weak var phoneNumberTextField: UITextField!
     @IBOutlet weak var zipCodeTextField: UITextField!
     @IBOutlet weak var tenantTextField: UITextField!
+    @IBOutlet weak var editButton: UIButton!
     
     var user: User? {
         didSet {
@@ -32,6 +33,7 @@ class UserDetailViewController: UIViewController {
         super.viewDidLoad()
         
         updateViews()
+        setupUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,6 +46,97 @@ class UserDetailViewController: UIViewController {
         super.viewWillDisappear(animated)
         
         tabBarController?.tabBar.isHidden = false
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
+    func setupUI() {
+        // UI Setup
+        editButton.layer.borderWidth = 1
+        editButton.layer.borderColor = UIColor.black.cgColor
+        
+        // First Name
+        firstNameTextField.backgroundColor = .clear
+        firstNameTextField.textColor = .white
+        firstNameTextField.tintColor = .white
+        firstNameTextField.borderStyle = .none
+        
+        // Last Name
+        lastNameTextField.backgroundColor = .clear
+        lastNameTextField.textColor = .white
+        lastNameTextField.tintColor = .white
+        lastNameTextField.borderStyle = .none
+        
+        // Email
+        emailTextField.backgroundColor = .clear
+        emailTextField.textColor = .white
+        emailTextField.tintColor = .white
+        emailTextField.borderStyle = .none
+        
+        // Phone Number
+        phoneNumberTextField.backgroundColor = .clear
+        phoneNumberTextField.textColor = .white
+        phoneNumberTextField.tintColor = .white
+        phoneNumberTextField.borderStyle = .none
+        
+        // ZipCode
+        zipCodeTextField.backgroundColor = .clear
+        zipCodeTextField.textColor = .white
+        zipCodeTextField.tintColor = .white
+        zipCodeTextField.borderStyle = .none
+        
+        // Tenant
+        tenantTextField.backgroundColor = .clear
+        tenantTextField.textColor = .white
+        tenantTextField.tintColor = .white
+        tenantTextField.borderStyle = .none
+        
+        // Create CALayer for each textField that will be
+        // The bottom border of the textField
+        
+        // First Name
+        let firstNameTextLayer = CALayer()
+        firstNameTextLayer.frame = CGRect(x: 0, y: firstNameTextField.bounds.maxY, width: firstNameTextField.bounds.size.width, height: 0.8)
+        
+        firstNameTextLayer.backgroundColor = UIColor.black.cgColor
+        firstNameTextField.layer.addSublayer(firstNameTextLayer)
+        
+        // Last Name
+        let lastNameTextLayer = CALayer()
+        lastNameTextLayer.frame = CGRect(x: 0, y: lastNameTextField.bounds.maxY, width: lastNameTextField.bounds.size.width, height: 0.8)
+        
+        lastNameTextLayer.backgroundColor = UIColor.black.cgColor
+        lastNameTextField.layer.addSublayer(lastNameTextLayer)
+        
+        // Email
+        let emailTextLayer = CALayer()
+        emailTextLayer.frame = CGRect(x: 0, y: emailTextField.bounds.maxY, width: emailTextField.bounds.size.width, height: 0.8)
+        
+        emailTextLayer.backgroundColor = UIColor.black.cgColor
+        emailTextField.layer.addSublayer(emailTextLayer)
+        
+        // PhoneNumber
+        let phoneNumberTextLayer = CALayer()
+        phoneNumberTextLayer.frame = CGRect(x: 0, y: phoneNumberTextField.bounds.maxY, width: phoneNumberTextField.bounds.size.width, height: 0.8)
+        
+        phoneNumberTextLayer.backgroundColor = UIColor.black.cgColor
+        phoneNumberTextField.layer.addSublayer(phoneNumberTextLayer)
+        
+        // ZipCode
+        let zipCodeTextLayer = CALayer()
+        zipCodeTextLayer.frame = CGRect(x: 0, y: zipCodeTextField.bounds.maxY, width: zipCodeTextField.bounds.size.width, height: 0.8)
+        
+        zipCodeTextLayer.backgroundColor = UIColor.black.cgColor
+        zipCodeTextField.layer.addSublayer(zipCodeTextLayer)
+        
+        // Tenant
+        let tenantTextLayer = CALayer()
+        tenantTextLayer.frame = CGRect(x: 0, y: tenantTextField.bounds.maxY, width: tenantTextField.bounds.size.width, height: 0.8)
+        
+        tenantTextLayer.backgroundColor = UIColor.black.cgColor
+        tenantTextField.layer.addSublayer(tenantTextLayer)
     }
     
     func updateViews() {
