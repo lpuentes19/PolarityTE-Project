@@ -25,7 +25,8 @@ class UserTableViewCell: UITableViewCell {
         
         userImageView.layer.cornerRadius = 25
     }
-    
+    // Replaces the reusable cells with this image so the wrong image doesn't appear in the wrong cell
+    // Instead it will be our placeholderImg
     override func prepareForReuse() {
         super.prepareForReuse()
         

@@ -11,6 +11,9 @@ import CoreData
 
 extension User {
     
+    // MARK: - Properties
+    
+    // Computed property that will always get the most up to date values
     var userRepresentation: UserRepresentation? {
         guard let firstName = firstName,
             let lastName = lastName,
@@ -24,9 +27,18 @@ extension User {
         if guid == nil {
             guid = UUID().uuidString
         }
-        return UserRepresentation(firstName: firstName, lastName: lastName, name: name, phoneNumber: phoneNumber, email: email, zipCode: zipCode, tenant: tenant, profilePhoto: String(data: profilePhoto, encoding: .utf8), guid: guid!)
+        return UserRepresentation(firstName: firstName,
+                                  lastName: lastName,
+                                  name: name,
+                                  phoneNumber: phoneNumber,
+                                  email: email,
+                                  zipCode: zipCode,
+                                  tenant: tenant,
+                                  // Encoding the profilePhoto properties value as base64 bit
+                                  profilePhoto: String(data: profilePhoto, encoding: .utf8), guid: guid!)
     }
     
+    // MARK: - Initializers
     convenience init(firstName: String,
                      lastName: String,
                      name: String,
@@ -50,7 +62,8 @@ extension User {
         self.profilePhoto = profilePhoto
         self.guid = guid
     }
-    
+    // Initializer that takes in a UserRepresentation that then sets the User properties
+    // To the values received from the database
     convenience init(userRepresentation: UserRepresentation, context: NSManagedObjectContext = CoreDataStack.shared.mainContext) {
         
         self.init(firstName: userRepresentation.firstName,
@@ -63,7 +76,7 @@ extension User {
                   profilePhoto: userRepresentation.profilePhoto?.data(using: .utf8),
                   guid: userRepresentation.guid!,
                   context: context)
-        
+        // Decoding the base64 bit image and passing the value to the profilePhoto property
         if let imageData = userRepresentation.profilePhoto, let decodedData = Data(base64Encoded: imageData, options: .ignoreUnknownCharacters) {
             profilePhoto = decodedData
         }

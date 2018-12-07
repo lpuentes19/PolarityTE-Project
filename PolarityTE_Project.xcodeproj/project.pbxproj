@@ -72,10 +72,10 @@
 		956D582A21B70EEB001E2649 /* PolarityTE_Project */ = {
 			isa = PBXGroup;
 			children = (
-				95C87E1721B9031A00993208 /* Storyboard */,
-				956D584D21B72425001E2649 /* Model */,
-				956D584921B71B8B001E2649 /* View Controller */,
-				956D584A21B71B98001E2649 /* View */,
+				95C87E1721B9031A00993208 /* Storyboards */,
+				956D584D21B72425001E2649 /* Models */,
+				956D584921B71B8B001E2649 /* View Controllers */,
+				956D584A21B71B98001E2649 /* Views */,
 				956D584021B70FCC001E2649 /* Resources */,
 			);
 			path = PolarityTE_Project;
@@ -86,13 +86,12 @@
 			children = (
 				956D582B21B70EEB001E2649 /* AppDelegate.swift */,
 				956D583521B70EED001E2649 /* Assets.xcassets */,
-				956D583721B70EED001E2649 /* LaunchScreen.storyboard */,
 				956D583A21B70EED001E2649 /* Info.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		956D584921B71B8B001E2649 /* View Controller */ = {
+		956D584921B71B8B001E2649 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				95C87E1521B8A96E00993208 /* UserTabBarController.swift */,
@@ -100,18 +99,18 @@
 				956D584321B71A9E001E2649 /* UserTableViewController.swift */,
 				956D584521B71B05001E2649 /* UserDetailViewController.swift */,
 			);
-			path = "View Controller";
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
-		956D584A21B71B98001E2649 /* View */ = {
+		956D584A21B71B98001E2649 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				956D584721B71B29001E2649 /* UserTableViewCell.swift */,
 			);
-			path = View;
+			path = Views;
 			sourceTree = "<group>";
 		};
-		956D584D21B72425001E2649 /* Model */ = {
+		956D584D21B72425001E2649 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				956D583221B70EEB001E2649 /* PolarityTE_Project.xcdatamodeld */,
@@ -120,15 +119,16 @@
 				956D585421B85AB7001E2649 /* UserController.swift */,
 				956D585021B725C7001E2649 /* CoreDataStack.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
-		95C87E1721B9031A00993208 /* Storyboard */ = {
+		95C87E1721B9031A00993208 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
 				956D582F21B70EEB001E2649 /* Main.storyboard */,
+				956D583721B70EED001E2649 /* LaunchScreen.storyboard */,
 			);
-			path = Storyboard;
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

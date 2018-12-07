@@ -26,6 +26,7 @@ class UserController {
         do {
             guard let representation = user.userRepresentation else { throw NSError() }
             request.httpBody = try JSONEncoder().encode(representation)
+            // Find user and update their properties on our end
             if let user = self.user(withUUID: user.guid!) {
                 self.update(user: user, with: representation)
             }
@@ -94,6 +95,7 @@ class UserController {
         do {
             guard let representation = user.userRepresentation else { throw NSError() }
             request.httpBody = try JSONEncoder().encode(representation)
+            // Find user and update their values
             if let user = self.user(withUUID: user.guid!) {
                 self.update(user: user, with: representation)
             }
@@ -132,6 +134,7 @@ class UserController {
         user.email = representation.email
         user.zipCode = representation.zipCode
         user.tenant = representation.tenant
+        // Decoding the base64 bit image and passing the value to the profilePhoto property
         if let imageData = representation.profilePhoto, let decodedData = Data(base64Encoded: imageData, options: .ignoreUnknownCharacters) {
             user.profilePhoto = decodedData
         }

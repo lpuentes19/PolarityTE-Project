@@ -8,8 +8,10 @@
 
 import Foundation
 
+// Created the UserRepresentation struct to help with encoding my User object.
+// Had trouble directly encoding it because of the Managed Object Context.
 struct UserRepresentation: Codable, Equatable {
-    
+    // MARK: - Properties
     var firstName: String
     var lastName: String
     var name: String
@@ -21,6 +23,7 @@ struct UserRepresentation: Codable, Equatable {
     var guid: String?
 }
 
+// MARK: - Coding Keys
 extension UserRepresentation {
     enum CodingKeys: String, CodingKey {
         case firstName = "first_name"

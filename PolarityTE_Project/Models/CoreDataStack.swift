@@ -9,6 +9,7 @@
 import Foundation
 import CoreData
 
+// Created this out of convenience so that we can simply call it when we need the MOC
 class CoreDataStack {
     
     static let shared = CoreDataStack()

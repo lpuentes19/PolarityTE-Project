@@ -1,5 +1,5 @@
 //
-//  CreateUserViewController.swift
+//  UserDetailViewController.swift
 //  PolarityTE_Project
 //
 //  Created by Luis Puentes on 12/4/18.
@@ -8,86 +8,91 @@
 
 import UIKit
 
-class CreateUserViewController: UIViewController {
+class UserDetailViewController: UIViewController {
 
-    // MARK: - Properties
+    @IBOutlet weak var userImageView: UIImageView!
+    
     @IBOutlet weak var firstNameTextField: UITextField!
     @IBOutlet weak var lastNameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var phoneNumberTextField: UITextField!
     @IBOutlet weak var zipCodeTextField: UITextField!
     @IBOutlet weak var tenantTextField: UITextField!
+    @IBOutlet weak var editButton: UIButton!
     
-    @IBOutlet weak var userImageView: UIImageView!
-    
-    @IBOutlet weak var createButton: UIButton!
+    var user: User? {
+        didSet {
+            self.updateViews()
+        }
+    }
     
     var userController: UserController?
+    // Created this so that we can pass this as the profilePhoto's value. 
     var selectedImage: UIImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        if let tbc = self.tabBarController as? UserTabBarController {
-            userController = tbc.userController
-        }
+        
+        updateViews()
         setupUI()
     }
-    
+    // Hiding tabBar when detailView is shown
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tabBarController?.tabBar.isHidden = true
+    }
+    // Unhiding the tabBar when detailView is about to disappear
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        tabBarController?.tabBar.isHidden = false
+    }
+    // Allows user to tap on the screen and resign the first responder (Textfield)
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
     
     func setupUI() {
-        // Create tapGesture for the UIImage & UI Setup
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleProfileImage))
-        userImageView.addGestureRecognizer(tapGesture)
-        userImageView.layer.cornerRadius = 50
-        
-        createButton.layer.borderWidth = 1
-        createButton.layer.borderColor = UIColor.black.cgColor
+        // UI Setup
+        editButton.layer.borderWidth = 1
+        editButton.layer.borderColor = UIColor.black.cgColor
         
         // First Name
         firstNameTextField.backgroundColor = .clear
         firstNameTextField.textColor = .white
         firstNameTextField.tintColor = .white
         firstNameTextField.borderStyle = .none
-        firstNameTextField.attributedPlaceholder = NSAttributedString(string: "First Name", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
         
         // Last Name
         lastNameTextField.backgroundColor = .clear
         lastNameTextField.textColor = .white
         lastNameTextField.tintColor = .white
         lastNameTextField.borderStyle = .none
-        lastNameTextField.attributedPlaceholder = NSAttributedString(string: "Last Name", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
         
         // Email
         emailTextField.backgroundColor = .clear
         emailTextField.textColor = .white
         emailTextField.tintColor = .white
         emailTextField.borderStyle = .none
-        emailTextField.attributedPlaceholder = NSAttributedString(string: "Email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
         
         // Phone Number
         phoneNumberTextField.backgroundColor = .clear
         phoneNumberTextField.textColor = .white
         phoneNumberTextField.tintColor = .white
         phoneNumberTextField.borderStyle = .none
-        phoneNumberTextField.attributedPlaceholder = NSAttributedString(string: "Phone Number", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
         
         // ZipCode
         zipCodeTextField.backgroundColor = .clear
         zipCodeTextField.textColor = .white
         zipCodeTextField.tintColor = .white
         zipCodeTextField.borderStyle = .none
-        zipCodeTextField.attributedPlaceholder = NSAttributedString(string: "Zip Code", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
         
         // Tenant
         tenantTextField.backgroundColor = .clear
         tenantTextField.textColor = .white
         tenantTextField.tintColor = .white
         tenantTextField.borderStyle = .none
-        tenantTextField.attributedPlaceholder = NSAttributedString(string: "Tenant", attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
         
         // Create CALayer for each textField that will be
         // The bottom border of the textField
@@ -135,58 +140,79 @@ class CreateUserViewController: UIViewController {
         tenantTextField.layer.addSublayer(tenantTextLayer)
     }
     
-    @objc func handleProfileImage() {
+    func updateViews() {
+        guard let user = user,
+            isViewLoaded else { return }
+        
+        title = user.name
+        if let imageData = user.profilePhoto {
+            userImageView.image = UIImage(data: imageData) ?? #imageLiteral(resourceName: "placeholderImg")
+        }
+        userImageView.layer.cornerRadius = 50
+        firstNameTextField.text = user.firstName
+        lastNameTextField.text = user.lastName
+        phoneNumberTextField.text = user.phoneNumber
+        emailTextField.text = user.email
+        zipCodeTextField.text = user.zipCode
+        tenantTextField.text = user.tenant
+    }
+    
+    func handleProfileImage() {
         let pickerController = UIImagePickerController()
         pickerController.delegate = self
         present(pickerController, animated: true, completion: nil)
     }
-    
+    // UIAlert method I can call when the user successfully creates a user
     func presentAlert() {
+        let alertController = UIAlertController(title: "Success", message: "Saved successfully", preferredStyle: .alert)
         
-        let alertController = UIAlertController(title: "Success", message: "You have successfully created a user!", preferredStyle: .alert)
-        
-        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+        let action = UIAlertAction(title: "OK", style: .default) { (_) in
+            self.navigationController?.popViewController(animated: true)
+        }
         
         alertController.addAction(action)
         present(alertController, animated: true, completion: nil)
     }
     
-    func clear() {
-        userImageView.image = #imageLiteral(resourceName: "placeholderImg")
-        firstNameTextField.text = ""
-        lastNameTextField.text = ""
-        emailTextField.text = ""
-        phoneNumberTextField.text = ""
-        zipCodeTextField.text = ""
-        tenantTextField.text = ""
+    @IBAction func editPhotoButtonTapped(_ sender: Any) {
+        handleProfileImage()
     }
     
-    @IBAction func createButtonTapped(_ sender: Any) {
-        guard let firstName = firstNameTextField.text, !firstName.isEmpty,
-            let lastName = lastNameTextField.text, !lastName.isEmpty,
-            let phoneNumber = phoneNumberTextField.text, !phoneNumber.isEmpty,
-            let email = emailTextField.text, !email.isEmpty,
-            let zipCode = zipCodeTextField.text, !zipCode.isEmpty,
-            let tenant = tenantTextField.text, !tenant.isEmpty,
-            let imageData = selectedImage?.jpegData(compressionQuality: 0.1)?.base64EncodedString() else { return }
+    @IBAction func saveButtonTapped(_ sender: Any) {
         
-        let user = User(firstName: firstName, lastName: lastName, name: "\(firstName) \(lastName)", phoneNumber: phoneNumber, email: email, zipCode: zipCode, tenant: tenant, profilePhoto: imageData.data(using: .utf8), guid: nil)
-        userController?.post(user: user)
+        guard let firstName = firstNameTextField.text,
+            let lastName = lastNameTextField.text,
+            let phoneNumber = phoneNumberTextField.text,
+            let email = emailTextField.text,
+            let zipCode = zipCodeTextField.text,
+            let tenant = tenantTextField.text else { return }
         
-        clear()
-        
-        do {
-            let moc = CoreDataStack.shared.mainContext
-            try moc.save()
-            presentAlert()
-        } catch {
-            print("Error saving the user, error: \(error.localizedDescription)")
+        if let user = user {
+            user.firstName = firstName
+            user.lastName = lastName
+            user.name = "\(firstName) \(lastName)"
+            user.phoneNumber = phoneNumber
+            user.email = email
+            user.zipCode = zipCode
+            user.tenant = tenant
+            if let imageData = selectedImage?.jpegData(compressionQuality: 0.1)?.base64EncodedString() {
+                user.profilePhoto = imageData.data(using: .utf8)
+            }            
+            userController?.patch(user: user)
+            
+            do {
+                let moc = CoreDataStack.shared.mainContext
+                try moc.save()
+                presentAlert()
+            } catch {
+                print("Error saving changes to user, error: \(error.localizedDescription)")
+            }
         }
     }
 }
 
-extension CreateUserViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
+extension UserDetailViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    // Allows us to select an image from our Photo Library
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[.originalImage] as? UIImage {
             selectedImage = image

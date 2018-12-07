@@ -13,7 +13,9 @@ class UserTableViewController: UITableViewController, NSFetchedResultsController
     
     // MARK: - Properties
     var userController: UserController?
-    
+    // FetchedResultsController made lazy to ensure it only instantiated when needed
+    // As FetchedResultsController is large and takes some CPU power to process
+    // This will observe and update objects for us automatically
     lazy var fetchedResultsController: NSFetchedResultsController<User> = {
         let fetchRequest: NSFetchRequest<User> = User.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
@@ -36,6 +38,7 @@ class UserTableViewController: UITableViewController, NSFetchedResultsController
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Passing the UserController instance through the property 'tabBarController'
         if let tbc = self.tabBarController as? UserTabBarController {
             userController = tbc.userController
         }
@@ -56,7 +59,8 @@ class UserTableViewController: UITableViewController, NSFetchedResultsController
         return cell
     }
 
-    // Override to support editing the table view.
+    // Lets you delete a User from Core Data, however the user will just reappear as it doesn't delete them from
+    // The database. Thinking I should comment this out to eliminate poor user experience
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let user = fetchedResultsController.object(at: indexPath)
@@ -113,6 +117,7 @@ class UserTableViewController: UITableViewController, NSFetchedResultsController
                 let user = fetchedResultsController.object(at: indexPath)
                 userDetailVC.user = user
             }
+            // Passing the UserController instance through segue
             userDetailVC.userController = userController
         }
     }
